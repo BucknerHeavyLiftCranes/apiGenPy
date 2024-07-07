@@ -11,7 +11,7 @@ load_dotenv()
 
 token = None
 
-def get_auth_token():
+def get_auth():
     # Make a request to the API to retrieve the authorization token
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded',

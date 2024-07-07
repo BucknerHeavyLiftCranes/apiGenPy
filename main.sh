@@ -19,6 +19,8 @@ touch ~/Projects/$projectName/main.py
 touch ~/Projects/$projectName/make_request.py
 
 
+echo "$projectName is a project created by the Buckner Heavy Lift Cranes API team. This project is used to interact with the $projectName API" > ~/Projects/$projectName/README.md
+
 echo ".gitignore" >> ~/Projects/$projectName/.gitignore
 echo ".env" >> ~/Projects/$projectName/.gitignore
 
@@ -35,13 +37,14 @@ case $authType in
         echo "CLIENT_ID=" >> ~/Projects/$projectName/.env
         echo "CLIENT_SECRET=" >> ~/Projects/$projectName/.env
         echo "TENET" >> ~/Projects/$projectName/.env
-        cat ./pyfiles/OAuth.py > ~/Projects/$projectName/auth.py
+        #cat ./pyfiles/OAuth.py > ~/Projects/$projectName/auth.py
+        curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/OAuth.py > ~/Projects/$projectName/auth.py 
         ;;
     2) 
         echo "API_KEY=" >> ~/Projects/$projectName/.env
         echo "USERNAME=" >> ~/Projects/$projectName/.env
         echo "PASSWORD=" >> ~/Projects/$projectName/.env
-        cat ./pyfiles/BearToken.py > ~/Projects/$projectName/auth.py
+        curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/bearer.py > ~/Projects/$projectName/auth.py
         ;;
     *)
         $authType = 0
@@ -49,8 +52,6 @@ case $authType in
 esac
 
 #Set up project files
-
-
 
 #Set up repo and make intial commit
 
