@@ -11,7 +11,7 @@ while true; do
         break
     fi
     touch $endpointName.py
-    curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/endpoint.py >> $endpointName.py ..
+    curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/endpoint.py >> $endpointName.py
     echo "Created file: $endpointName"
 done
 
