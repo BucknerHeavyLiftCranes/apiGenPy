@@ -16,8 +16,12 @@ touch ~/Projects/$projectName/README.md
 touch ~/Projects/$projectName/.gitignore
 touch ~/Projects/$projectName/main.py
 
-
 echo "$projectName is a project created by the Buckner Heavy Lift Cranes API team. This project is used to interact with the $projectName API" > ~/Projects/$projectName/README.md
+
+#download endpoint creation script
+curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/endpoints.sh >> ~/Projects/$projectName/endpoints.sh
+chmod +x ~/Projects/$projectName/endpoints.sh
+~/Projects/$projectName/endpoints.sh
 
 echo ".gitignore" >> ~/Projects/$projectName/.gitignore
 echo ".env" >> ~/Projects/$projectName/.gitignore
@@ -65,7 +69,7 @@ case $dbType in
         echo "DB_USER=" >> ~/Projects/$projectName/.env
         echo "DB_PASSWORD=" >> ~/Projects/$projectName/.env
         curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/starkMain.py >> ~/Projects/$projectName/main.py
-        echo "Downloading PyODBC" driver"
+        echo "Downloading PyODBC driver"
         sudo ACCEPT_EULA=Y apt-get install msodbcsql18 -y
         ;;
     *)
