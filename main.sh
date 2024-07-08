@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #Main binary thaht creates project 
 echo "Welcome to the Buckner Heavy Lift Cranes API project wizard 🧙‍♂️🪄"
 echo "Please enter the name of the project: "
