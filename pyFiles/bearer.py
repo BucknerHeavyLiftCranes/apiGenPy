@@ -34,21 +34,14 @@ def get_auth():
         
         # Extract the token from the response
         if response.status_code == 200 and response.cookies:
-            # Extract the token from the response
-            
             token = response.cookies['authToken']
             print("Authorization token exported successfully.")
             return token
         else:
             print(f"Failed to retrieve authorization token. Status code: {response.status_code}, Response body: {response.text}")
-            print(response.cookies)
             return
     
     except requests.exceptions.RequestException as e:
-        print("Failed to connect to the API.")
-        print(f"Exception type: {e.__class__.__name__}, Message: {e}, Traceback: {traceback.format_exc()}")
-        return
+        print(f"Failed to connect to the API. Exception: {e}")
     except Exception as e:
-        print("An error occurred:" + str(e))
-        print(f"Exception type: {e.__class__.__name__}, Message: {e}, Traceback: {traceback.format_exc()}")
-        return
+        print(f"An error occurred: {e}")

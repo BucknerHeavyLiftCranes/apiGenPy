@@ -5,9 +5,6 @@ import os
 from auth import get_auth
 import traceback
 
-
-    
-
 def make_request(endpoint, payload, retry_count=0):
     if endpoint is None:
         raise Exception("Failed to retrieve data. No endpoint provided.")
