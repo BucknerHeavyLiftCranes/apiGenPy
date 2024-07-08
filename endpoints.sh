@@ -1,6 +1,6 @@
 echo "Welcome to the endpoint wizard 🧙‍♂️🪄"
 echo "This script will help you create connections to the api endpoints" 
-
+pwd
 
 #set up endpoint files
 echo "Please enter the names of the files you would like to create for the endpoints. Type 'q' when done: "
