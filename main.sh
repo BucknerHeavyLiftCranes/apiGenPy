@@ -21,6 +21,8 @@ echo "$projectName is a project created by the Buckner Heavy Lift Cranes API tea
 #download endpoint creation script
 curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/endpoints.sh >> ~/Projects/$projectName/endpoints.sh
 chmod +x ~/Projects/$projectName/endpoints.sh
+
+echo "running endpoint creation script"
 ~/Projects/$projectName/endpoints.sh
 
 echo ".gitignore" >> ~/Projects/$projectName/.gitignore
