@@ -16,7 +16,7 @@ touch README.md
 touch .gitignore
 
 
-echo "$projectName is a project created by the Buckner Heavy Lift Cranes API team. This project is used to interact with the $projectName API" > ~/Projects/$projectName/README.md
+echo "$projectName is a project created by the Buckner Heavy Lift Cranes API team. This project is used to interact with the $projectName API" > README.md
 
 #download endpoint creation script
 curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/endpoints.sh > endpoints.sh
@@ -44,9 +44,9 @@ case $authType in
         curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/OAuth.py > auth.py 
         ;;
     2) 
-        echo "API_KEY=" >> ~/Projects/$projectName/.env
-        echo "USERNAME=" >> ~/Projects/$projectName/.env
-        echo "PASSWORD=" >> ~/Projects/$projectName/.env
+        echo "API_KEY=" >> .env
+        echo "USERNAME=" >> .env
+        echo "PASSWORD=" >> .env
         curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/bearer.py > auth.py
         ;;
     *)

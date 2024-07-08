@@ -7,7 +7,7 @@ echo "Please enter the names of the files you would like to create for the endpo
 
 while true; do
     read -p "Enter file name: " endpointName
-    if [ "$endpointName" = "q"  || "$endpointName" = "Q" ]; then
+    if [["$endpointName" = "q"  || "$endpointName" = "Q" ]]; then
         break
     fi
     if [[ $endpointName != get* ]]; then
@@ -16,8 +16,8 @@ while true; do
     fi
     touch $endpointName.py
     curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/endpoint.py > $endpointName.py
-    sed -i 's/getThing/${endpointName}/g' $endpointName.py
+    sed -i 'getThing/${endpointName}' $endpointName.py
     echo "Created file: $endpointName"
 done
 
-echo "All files have been created."q
+echo "All files have been created."
