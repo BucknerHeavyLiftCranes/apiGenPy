@@ -3,7 +3,9 @@ echo "This script will help you create connections to the api endpoints"
 
 
 #set up endpoint files
-echo "Please enter the names of the files you would like to create for the endpoints. Begin each name with 'get' followed by the name of the rescource you are trying to retive. Type 'q' when done: "
+echo "Please enter the names of the files you would like to create for the endpoints." 
+echo "Begin each name with 'get' followed by the name of the rescource you are trying to retive."
+echo "Type 'q' when done: "
 
 while true; do
     read -p "Enter file name: " endpointName
