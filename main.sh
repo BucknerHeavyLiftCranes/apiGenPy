@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Main binary thaht creates project 
-echo "Welcome to the Buckner Heavy Lift Cranes API project wizard 🧙‍♂️🪄"
+echo "$(curl -s https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/utils/apiWizard.txt)"
 echo "Please enter the name of the project: "
 
 read projectName

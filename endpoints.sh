@@ -1,16 +1,15 @@
 #!/bin/bash
 
-echo "Welcome to the endpoint wizard 🧙‍♂️🪄"
+echo "$(curl -s https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/utils/endpointWizard.txt)"
 echo "This script will help you create connections to the api endpoints" 
 
 
 #set up endpoint files
 echo "Please enter the names of the files you would like to create for the endpoints." 
 echo "Begin each name with 'get' followed by the name of the resource you are trying to retrieve."
-echo "Type 'q' when done: "
 
 while true; do
-    read -p "Enter file name: " endpointName
+    read -p "Enter file name. Type 'q' when done: " endpointName
     if [[ $endpointName = "q" || $endpointName = "Q" ]]; then
         break
     elif [[ $endpointName != get* ]]; then
