@@ -3,9 +3,11 @@
 cleanup() {
     if [ -z "$projectName" ]; then
         echo -e "\nExiting Wizard..."
+        sleep 1.5
+        clear
         exit 1
     elif [ -d "$HOME/Projects/$projectName" ]; then
-        echo -e "\nQuitting Wizard"
+        echo -e "\nExiting Wizard"
         echo "Cleaning up..."
         trash-cli "$HOME/Projects/$projectName"
         sleep 1.5
@@ -96,25 +98,6 @@ echo "requests" >> requirements.txt
 
 echo "$projectName is a project created by the Buckner Heavy Lift Cranes API team. This project is used to interact with the $projectName API" > README.md
 
-#download endpoint creation script
-curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/endpoints.sh > endpoints.sh
-chmod +x endpoints.sh
-
-echo "Running endpoint creation script \n"
-echo -ne 'Loading: [                    ] (0%)\r'
-sleep 0.2
-echo -ne 'Loading: [#####               ] (25%)\r'
-sleep 0.2
-echo -ne 'Loading: [##########          ] (50%)\r'
-sleep 0.2
-echo -ne 'Loading: [###############     ] (75%)\r'
-sleep 0.2
-echo -ne 'Loading: [####################] (100%)\r'
-echo -ne '\n'
-
-
-
-./endpoints.sh
 
 echo ".gitignore" >> .gitignore
 echo ".env" >> .gitignore
@@ -146,7 +129,7 @@ case $authType in
 esac
 
 #Set up project files
-curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/makeRequets.py > makeRequests.py
+curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/makeRequests.py > makeRequests.py
 
 #setting up database connection
 echo "What database would you like to connect to?"
@@ -184,6 +167,23 @@ echo "Installing requirements"
 python3 -m pip install --upgrade pip
 pip3 install -r requirements.txt
 
+#download endpoint creation script
+curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/endpoints.sh > endpoints.sh
+chmod +x endpoints.sh
+
+echo "Running endpoint creation script \n"
+echo -ne 'Loading: [                    ] (0%)\r'
+sleep 0.3
+echo -ne 'Loading: [#####               ] (25%)\r'
+sleep 0.3
+echo -ne 'Loading: [##########          ] (50%)\r'
+sleep 0.3
+echo -ne 'Loading: [###############     ] (75%)\r'
+sleep 0.3
+echo -ne 'Loading: [####################] (100%)\r'
+echo -ne '\n'
+
+./endpoints.sh
 
 trap - SIGINT SIGTERM EXIT
 
