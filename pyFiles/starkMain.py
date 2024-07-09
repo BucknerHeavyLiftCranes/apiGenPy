@@ -24,7 +24,8 @@ def main():
     cursor = connection.cursor()
 
     #Do some stuff
-    #Maybe run some of those api pulls you made
+    #run the api calls here 
+
     
     
     #What do you wanna do in the db 🤷?

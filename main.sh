@@ -8,15 +8,15 @@ cleanup() {
         mv "$HOME/Projects/$projectName" ~/.Trash/
         echo "Cleanup complete"
         sleep .8
-        clear
+        #clear
     else
         echo -e "\nQuitting Wizard..."
         sleep .8
-        clear
+        #clear
     fi
 }
 
-trap cleanup EXIT
+trap cleanup  SIGINT SIGTERM EXIT
 
 
 #Main binary thaht creates project 
@@ -93,7 +93,9 @@ cd ~/Projects/$projectName
 #Set up project files and add to gitignore
 touch README.md
 touch .gitignore
-
+touch requirements.txt
+echo "python-dotenv" >> requirements.txt
+echo "requests" >> requirements.txt
 
 echo "$projectName is a project created by the Buckner Heavy Lift Cranes API team. This project is used to interact with the $projectName API" > README.md
 
@@ -152,7 +154,7 @@ curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFile
 #setting up database connection
 echo "What database would you like to connect to?"
 echo "1) Stark Tower SQLServer"
-echo "Any key for other"
+echo "Enter selection [1]. Press any other key to continue without setting up DB"
 read dbType
 
 case $dbType in
@@ -182,8 +184,11 @@ esac
 echo "You will need to manually add DB credentials to the .env file"
 
 echo "Installing requirements"
-python3 -m pip3 install --upgrade pip3
+python3 -m pip install --upgrade pip
 pip3 install -r requirements.txt
+
+
+trap - SIGINT SIGTERM EXIT
 
 #Set up repo and make intial commit
 
@@ -198,3 +203,12 @@ pip3 install -r requirements.txt
 # git push -u origin master
 
 # echo "Project $projectName created and pushed to github"
+
+echo -e "\nProject $projectName created successfully"
+echo "You can now start developing your API"
+echo "You will need to define any acrets in the .env file and specify the endpoint urls in each of your endpoint files"
+echo "You can create more endpoint fiels at anytime by running ./endpoints.sh"
+echo "Type python3 main.py to run your API integration"
+echo "Exiting the wizard..."
+echo -e "\n"
+sleep .5

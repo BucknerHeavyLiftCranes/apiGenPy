@@ -37,6 +37,11 @@ while true; do
         # Replace the original main.py with the temporary file
         mv temp_main.py main.py
         echo "Added import for $endpointName to the top of main.py"
+
+        # Add the new endpoint to the endpoints list in main.py
+        sed -i '' "/#run the api calls here/a\\
+        ${endpointName}Data = ${endpointName}()" main.py
+        
     fi
 done
 
