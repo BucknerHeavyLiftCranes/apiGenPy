@@ -41,8 +41,8 @@ while true; do
         # Add the new endpoint to the endpoints list in main.py
         if grep -q "#run the api calls here" main.py; then
             sed -i '' "/#run the api calls here/a\\
-            ${endpointName}Data = ${endpointName}()\\
-        " main.py
+                ${endpointName}Data = ${endpointName}()\\
+            " main.py
             echo "Added ${endpointName}Data = ${endpointName}() after '#run the api calls here' in main.py"
         else
             echo "Error: Could not find '#run the api calls here' in main.py. Manual edit may be required."

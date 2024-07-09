@@ -143,7 +143,7 @@ case $dbType in
         echo "DB_NAME=" >> .env
         echo "DB_USER=" >> .env
         echo "DB_PASSWORD=" >> .env
-        curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/starkMain.py >> main.py
+        curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/starkMain.py > main.py
         echo "Downloading PyODBC driver"
         # Check if unixODBC is installed
         if ! brew list unixodbc &> /dev/null
@@ -158,7 +158,7 @@ case $dbType in
         ;;
     *)
         $dbType = 0
-        touch main.py
+        curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/defaultMain.py > main.py
         ;;
 esac
 echo "You will need to manually add DB credentials to the .env file"
