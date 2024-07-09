@@ -1,22 +1,19 @@
 #!/bin/bash
 # Trap for cleanup on exit or error
 cleanup() {
-    if [ -n "$projectName" ] && [ -d "$HOME/Projects/$projectName" ]; then
+    if [ -z "$projectName" ]; then
+        echo -e "\nExiting Wizard..."
+        exit 1
+    elif [ -d "$HOME/Projects/$projectName" ]; then
         echo -e "\nQuitting Wizard"
         echo "Cleaning up..."
-        echo "Moving project directory to trash..."
-        mv "$HOME/Projects/$projectName" ~/.Trash/
-        echo "Cleanup complete"
-        sleep .8
-        #clear
-    else
-        echo -e "\nQuitting Wizard..."
-        sleep .8
-        #clear
+        trash-cli "$HOME/Projects/$projectName"
+        sleep 1.5
+        clear
     fi
+    exit 1
 }
-
-trap cleanup  SIGINT SIGTERM EXIT
+trap cleanup SIGINT SIGTERM 
 
 
 #Main binary thaht creates project 
