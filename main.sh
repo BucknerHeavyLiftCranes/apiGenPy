@@ -1,4 +1,23 @@
 #!/bin/bash
+# Trap for cleanup on exit or error
+cleanup() {
+    if [ -n "$projectName" ] && [ -d "$HOME/Projects/$projectName" ]; then
+        echo -e "\nQuitting Wizard"
+        echo "Cleaning up..."
+        echo "Moving project directory to trash..."
+        mv "$HOME/Projects/$projectName" ~/.Trash/
+        echo "Cleanup complete"
+        sleep .8
+        clear
+    else
+        echo -e "\nQuitting Wizard..."
+        sleep .8
+        clear
+    fi
+}
+
+trap cleanup EXIT
+
 
 #Main binary thaht creates project 
 echo "$(curl -s https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/utils/apiWizard.txt)"

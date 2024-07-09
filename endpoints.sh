@@ -5,7 +5,7 @@ echo "This script will help you create connections to the api endpoints"
 
 
 #set up endpoint files
-echo "Please enter the names of the files you would like to create for the endpoints." 
+echo "Please enter the names of each file you would like to create for an endpoint followed by Enter." 
 echo "Begin each name with 'get' followed by the name of the resource you are trying to retrieve."
 
 while true; do
