@@ -30,6 +30,13 @@ while true; do
         curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/endpoint.py > $endpointName.py
         sed -i '' "s/getThing/${endpointName}/g" $endpointName.py
         echo "Created file: $endpointName"
+        # Create a temporary file with the new import at the top
+        echo "from $endpointName import $endpointName" > temp_main.py
+        # Append the contents of the original main.py to the temporary file
+        cat main.py >> temp_main.py
+        # Replace the original main.py with the temporary file
+        mv temp_main.py main.py
+        echo "Added import for $endpointName to the top of main.py"
     fi
 done
 

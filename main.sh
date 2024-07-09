@@ -24,6 +24,46 @@ while true; do
     fi
 done
 
+# Check if Homebrew is installed
+echo "Checking if Homebrew is installed"
+if ! command -v brew &> /dev/null
+then
+    echo "Homebrew is required but not found. Do you want to install Homebrew? (y/n): "
+    read installHomebrew
+    if [[ "$installHomebrew" == "y" || "$installHomebrew" == "Y" ]]; then
+        echo "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        
+        # Add Homebrew to PATH for the current session
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+        
+        echo "Homebrew installed successfully."
+    else
+        echo "Homebrew is required for this project. Exiting..."
+        exit 1
+    fi
+else
+    brew update
+fi
+
+echo "Checking if Python is installed"
+if ! command -v python3 &> /dev/null
+then
+    echo "Python not found. Do you want to install Python? (y/n): "
+    read installPython
+    if [[ "$installPython" == "y" || "$installPython" == "Y" ]]; then
+        echo "Installing Python..."
+        brew install python
+        echo "Python installed successfully."
+    else
+        echo "Python is required for this project. Exiting..."
+        exit 1
+    fi
+else
+    echo "Python is already installed."
+fi
+
+
 echo "Creating project $projectName"
 
 #Set up project directory
@@ -55,7 +95,7 @@ echo -ne 'Loading: [####################] (100%)\r'
 echo -ne '\n'
 
 
-clear
+
 ./endpoints.sh
 
 echo ".gitignore" >> .gitignore
@@ -104,15 +144,27 @@ case $dbType in
         echo "DB_PASSWORD=" >> .env
         curl https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/starkMain.py >> main.py
         echo "Downloading PyODBC driver"
-        sudo ACCEPT_EULA=Y apt-get install msodbcsql18 -y
+        # Check if unixODBC is installed
+        if ! brew list unixodbc &> /dev/null
+        then
+            echo "unixODBC not found. Installing unixODBC..."
+            brew install unixodbc
+            echo "unixODBC installed successfully."
+        else
+            echo "unixODBC is already installed."
+        fi
+        echo "pyodbc" >> requirements.txt
         ;;
     *)
         $dbType = 0
         touch main.py
         ;;
 esac
-
 echo "You will need to manually add DB credentials to the .env file"
+
+echo "Installing requirements"
+python3 -m pip3 install --upgrade pip3
+pip3 install -r requirements.txt
 
 #Set up repo and make intial commit
 
