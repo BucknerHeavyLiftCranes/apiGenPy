@@ -2,7 +2,7 @@ import os
 import re
 import subprocess
 
-def create_endpoints():
+def main():
     print("This script will help you create connections to the API endpoints")
 
     while True:
@@ -28,7 +28,7 @@ def create_endpoints():
                 continue
         
         # Create the endpoint file
-        template_url = "https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/endpoint.py"
+        template_url = "https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGenPy/main/pyFiles/endpoint.py"
         subprocess.run(["curl", "-s", template_url, "-o", file_path], check=True)
         
         # Replace 'getThing' with the actual endpoint name

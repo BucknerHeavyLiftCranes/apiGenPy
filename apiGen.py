@@ -61,7 +61,7 @@ def setup_project_files(project_path):
     Path('README.md').write_text(f"{project_path.name} is a project created by the Buckner Heavy Lift Cranes API team.")
     Path('.gitignore').write_text(".gitignore\n.env\n")
     Path('requirements.txt').write_text("python-dotenv\nrequests\n")
-    download_file_from_github("https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/endpoints.py", "endpoints.py")
+    download_file_from_github("https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGenPy/main/endpoints.py", "endpoints.py")
 
 
 def setup_auth(project_path):
@@ -70,10 +70,10 @@ def setup_auth(project_path):
     
     if auth_type == '1':
         env_file.write_text("CLIENT_ID=\nCLIENT_SECRET=\nTENET=\n")
-        download_file_from_github("https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/OAuth.py", "auth.py")
+        download_file_from_github("https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGenPy/main/pyFiles/OAuth.py", "auth.py")
     elif auth_type == '2':
         env_file.write_text("API_KEY=\nUSERNAME=\nPASSWORD=\n")
-        download_file_from_github("https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/bearer.py", "auth.py")
+        download_file_from_github("https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGenPy/main/pyFiles/bearer.py", "auth.py")
 
 def setup_database(project_path):
     db_type = input("Select database:\n1) Stark Tower SQLServer\nEnter selection [1]: ")
@@ -81,12 +81,12 @@ def setup_database(project_path):
     if db_type == '1':
         with open(project_path / '.env', 'a') as f:
             f.write("DB_URL=\nDB_NAME=\nDB_USER=\nDB_PASSWORD=\n")
-        download_file_from_github("https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/starkMain.py", "main.py")
+        download_file_from_github("https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGenPy/main/pyFiles/starkMain.py", "main.py")
         subprocess.run(["brew", "install", "unixodbc"])
         with open(project_path / 'requirements.txt', 'a') as f:
             f.write("pyodbc\n")
     else:
-        download_file_from_github("https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGen/main/pyFiles/defaultMain.py", "main.py")
+        download_file_from_github("https://raw.githubusercontent.com/BucknerHeavyLiftCranes/apiGenPy/main/pyFiles/defaultMain.py", "main.py")
         pass
 
 def run_endpoints_script():
@@ -124,6 +124,9 @@ def main():
         print(f"Run your API integration with: python3 {project_path}/main.py")
         
     except KeyboardInterrupt:
+        cleanup(project_name)
+    except Exception as e:
+        print(f"An error occurred: {e}")
         cleanup(project_name)
 
 if __name__ == "__main__":
