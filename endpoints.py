@@ -53,7 +53,7 @@ def main():
         # Add function call
         function_call = f"{endpoint_name}Data = {endpoint_name}()\n"
         if "#run the api calls here" in main_content:
-            main_content = main_content.replace("#run the api calls here", f"#run the api calls here\n{function_call}")
+            main_content = main_content.replace("#run the api calls here", f"#run the api calls here\n\t{function_call}")
         else:
             print("Error: Could not find '#run the api calls here' in main.py. Manual edit may be required.")
         
